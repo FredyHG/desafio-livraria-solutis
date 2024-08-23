@@ -18,7 +18,6 @@ public class BookFactory {
                                         Double price,
                                         String publisher,
                                         List<String> author,
-                                        Integer size,
                                         Float freight,
                                         Integer stock) {
         return new Printed(title, price, publisher, author, freight, stock);

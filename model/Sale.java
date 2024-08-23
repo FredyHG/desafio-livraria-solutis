@@ -1,12 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Sale {
-    private Book[] books;
+    private ArrayList<Book> books;
     private String clientName;
     private Integer number;
     private Double price;
 
-    public Sale(Book[] books, String clientName, Integer number, Double price) {
+    public Sale(ArrayList<Book> books, String clientName, Integer number, Double price) {
         this.books = books;
         this.clientName = clientName;
         this.number = number;
@@ -28,11 +30,11 @@ public class Sale {
                 '}';
     }
 
-    public Book[] getBooks() {
+    public ArrayList<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Book[] books) {
+    public void setBooks(ArrayList<Book> books) {
         this.books = books;
     }
 

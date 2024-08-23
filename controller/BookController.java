@@ -19,4 +19,6 @@ public class BookController {
     public List<Book> listAll() {
         return bookServiceImpl.findAll();
     }
+
+
 }
