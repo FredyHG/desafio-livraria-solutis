@@ -13,18 +13,21 @@ public class InputHandler {
     }
 
     public String getBookTitle() {
-        System.out.print("Insira o título do livro: ");
-        String title = sc.nextLine();
-        if (title.isEmpty()) {
-            throw new IllegalArgumentException("O título não pode ser vazio.");
+        while(true){
+            System.out.print("Insira o título do livro: ");
+            String title = sc.nextLine();
+            if (!title.isEmpty()) {
+                return title;
+            }else{
+                System.out.println("O título não pode ser vazio.");
+            }
         }
-        return title;
     }
 
     public double getBookPrice() {
-        System.out.print("Insira o valor do livro: ");
         while (true) {
             try {
+                System.out.print("Insira o valor do livro: ");
                 double price = sc.nextDouble();
                 if (price <= 0) {
                     throw new IllegalArgumentException("O valor do livro não pode ser negativo.");
@@ -40,13 +43,16 @@ public class InputHandler {
     }
 
     public String getBookPublisher() {
-        System.out.print("Insira a editora do livro: ");
-        sc.nextLine();
-        String publisher = sc.nextLine();
-        if (publisher.isEmpty()) {
-            throw new IllegalArgumentException("A editora não pode ser vazia.");
+        while(true){
+            System.out.print("Insira a editora do livro: ");
+            sc.nextLine();
+            String publisher = sc.nextLine();
+            if (!publisher.isEmpty()) {
+                return publisher;
+            } else {
+                System.out.println("A editora não pode ser vazia.");
+            }
         }
-        return publisher;
     }
 
     public List<String> getBookAuthors() {
@@ -75,8 +81,8 @@ public class InputHandler {
     }
 
     public String getBookType() {
-        System.out.print("O livro é digital ou físico? (D/F) ");
         while (true) {
+            System.out.print("O livro é digital ou físico? (D/F) ");
             String type = sc.nextLine();
             if (type.equalsIgnoreCase("D") || type.equalsIgnoreCase("F")) {
                 return type;
@@ -87,9 +93,9 @@ public class InputHandler {
     }
 
     public int getBookSize() {
-        System.out.print("Insira o tamanho do livro: ");
         while (true) {
             try {
+                System.out.print("Insira o tamanho do livro: ");
                 int size = sc.nextInt();
                 if (size <= 0) {
                     throw new IllegalArgumentException("O tamanho do livro deve ser maior que zero.");
@@ -105,9 +111,9 @@ public class InputHandler {
     }
 
     public float getBookFreight() {
-        System.out.print("Insira o valor do frete: ");
         while (true) {
             try {
+                System.out.print("Insira o valor do frete: ");
                 float freight = sc.nextFloat();
                 if (freight < 0) {
                     throw new IllegalArgumentException("O valor do frete não pode ser negativo.");
@@ -123,9 +129,9 @@ public class InputHandler {
     }
 
     public int getBookStock() {
-        System.out.print("Insira o número do estoque: ");
         while (true) {
             try {
+                System.out.print("Insira o número do estoque: ");
                 int stock = sc.nextInt();
                 if (stock < 0) {
                     throw new IllegalArgumentException("O número do estoque não pode ser negativo.");
