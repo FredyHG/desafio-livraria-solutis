@@ -13,7 +13,7 @@ public class InputHandler {
     }
 
     public String getBookTitle() {
-        System.out.println("Insira o título do livro:");
+        System.out.print("Insira o título do livro:");
         String title = sc.nextLine();
         if (title.isEmpty()) {
             throw new IllegalArgumentException("O título não pode ser vazio.");
@@ -22,25 +22,25 @@ public class InputHandler {
     }
 
     public double getBookPrice() {
-        System.out.println("Insira o valor do livro:");
+        System.out.print("Insira o valor do livro:");
         while (true) {
             try {
                 double price = sc.nextDouble();
-                if (price < 0) {
+                if (price <= 0) {
                     throw new IllegalArgumentException("O valor do livro não pode ser negativo.");
                 }
                 return price;
             } catch (InputMismatchException e) {
-                System.out.println("Por favor, insira um número válido para o preço.");
+                System.out.print("Por favor, insira um número válido para o preço.");
                 sc.nextLine();
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.print(e.getMessage());
             }
         }
     }
 
     public String getBookPublisher() {
-        System.out.println("Insira a editora do livro:");
+        System.out.print("Insira a editora do livro:");
         sc.nextLine();
         String publisher = sc.nextLine();
         if (publisher.isEmpty()) {
@@ -54,15 +54,15 @@ public class InputHandler {
         String anotherAuthor;
 
         do {
-            System.out.println("Insira o autor do livro:");
+            System.out.print("Insira o autor do livro:");
             String author = sc.nextLine();
             if (author.isEmpty()) {
-                System.out.println("O nome do autor não pode ser vazio.");
+                System.out.print("O nome do autor não pode ser vazio.");
             } else {
                 authors.add(author);
             }
 
-            System.out.println("Deseja inserir mais um autor? (S/N)");
+            System.out.print("Deseja inserir mais um autor? (S/N)");
             anotherAuthor = sc.nextLine();
 
         } while (anotherAuthor.equalsIgnoreCase("S"));
@@ -75,19 +75,19 @@ public class InputHandler {
     }
 
     public String getBookType() {
-        System.out.println("O livro é digital ou físico? (D/F)");
+        System.out.print("O livro é digital ou físico? (D/F)");
         while (true) {
             String type = sc.nextLine();
             if (type.equalsIgnoreCase("D") || type.equalsIgnoreCase("F")) {
                 return type;
             } else {
-                System.out.println("Por favor, insira 'D' para digital ou 'F' para físico.");
+                System.out.print("Por favor, insira 'D' para digital ou 'F' para físico.");
             }
         }
     }
 
     public int getBookSize() {
-        System.out.println("Insira o tamanho do livro:");
+        System.out.print("Insira o tamanho do livro:");
         while (true) {
             try {
                 int size = sc.nextInt();
@@ -96,16 +96,16 @@ public class InputHandler {
                 }
                 return size;
             } catch (InputMismatchException e) {
-                System.out.println("Por favor, insira um número válido para o tamanho.");
+                System.out.print("Por favor, insira um número válido para o tamanho.");
                 sc.nextLine();
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.print(e.getMessage());
             }
         }
     }
 
     public float getBookFreight() {
-        System.out.println("Insira o valor do frete:");
+        System.out.print("Insira o valor do frete:");
         while (true) {
             try {
                 float freight = sc.nextFloat();
@@ -114,16 +114,16 @@ public class InputHandler {
                 }
                 return freight;
             } catch (InputMismatchException e) {
-                System.out.println("Por favor, insira um número válido para o frete.");
+                System.out.print("Por favor, insira um número válido para o frete.");
                 sc.nextLine();
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.print(e.getMessage());
             }
         }
     }
 
     public int getBookStock() {
-        System.out.println("Insira o número do estoque:");
+        System.out.print("Insira o número do estoque:");
         while (true) {
             try {
                 int stock = sc.nextInt();
@@ -132,10 +132,10 @@ public class InputHandler {
                 }
                 return stock;
             } catch (InputMismatchException e) {
-                System.out.println("Por favor, insira um número válido para o estoque.");
+                System.out.print("Por favor, insira um número válido para o estoque.");
                 sc.nextLine();
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.print(e.getMessage());
             }
         }
     }

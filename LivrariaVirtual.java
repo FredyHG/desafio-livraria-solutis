@@ -7,17 +7,17 @@ import model.Printed;
 import repository.BookRepositoryImpl;
 import services.BookServiceImpl;
 import utils.InputHandler;
-
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class LivrariaVirtual {
 
-    public static void main(String[] args) {
+    private static final int MAX_PRINTED = 10;
+    private static final int MAX_ELECTRONIC = 20;
 
+    public static void main(String[] args) {
+        registerBook();
     }
 
     public static void panel() {
@@ -31,7 +31,31 @@ public class LivrariaVirtual {
         BookFactory.createElectronic(null, null, null, null, null); //example factory
     }
 
-    public void registerBook() {
+
+    public static BookController createBookController(){
+        BookRepositoryImpl bookRepository = new BookRepositoryImpl();
+        BookServiceImpl bookServiceImpl = new BookServiceImpl(bookRepository);
+        return new BookController(bookServiceImpl);
+    }
+
+    public static int countDigitalBooks() {
+        BookController bookController = createBookController();
+        return (int) bookController.listAll().stream()
+                .filter(book -> book instanceof Electronic)
+                .count();
+    }
+
+    public static int countPhysicalBooks() {
+        BookController bookController = createBookController();
+        return (int) bookController.listAll().stream()
+                .filter(book -> book instanceof Printed)
+                .count();
+    }
+
+
+
+    public static void registerBook() {
+        BookController bookController = createBookController();
         Scanner sc = new Scanner(System.in);
 
         try (sc) {
@@ -43,12 +67,21 @@ public class LivrariaVirtual {
             String type = inputHandler.getBookType();
 
             if (type.equalsIgnoreCase("D")) {
-                int size = inputHandler.getBookSize();
-                BookFactory.createElectronic(title, price, publisher, authors, size);
-            } else {
+                if (countDigitalBooks() >= MAX_ELECTRONIC){
+                    System.out.println("Limite de cadastros atingido para livros digitais.");
+                }else{
+                    int size = inputHandler.getBookSize();
+                    Electronic electronic = BookFactory.createElectronic(title, price, publisher, authors, size);
+                    bookController.addBook(electronic);
+                }
+
+            }else if (countPhysicalBooks() >= MAX_PRINTED) {
+                System.out.println("Limite de cadastros atingido para livros fisicos.");
+            }else{
                 float freight = inputHandler.getBookFreight();
                 int stock = inputHandler.getBookStock();
-                BookFactory.createPrinted(title, price, publisher, authors, freight, stock);
+                Printed printed = BookFactory.createPrinted(title, price, publisher, authors, freight, stock);
+                bookController.addBook(printed);
             }
 
             System.out.println("Livro registrado com sucesso!");
