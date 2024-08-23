@@ -13,7 +13,7 @@ public class InputHandler {
     }
 
     public String getBookTitle() {
-        System.out.print("Insira o título do livro:");
+        System.out.print("Insira o título do livro: ");
         String title = sc.nextLine();
         if (title.isEmpty()) {
             throw new IllegalArgumentException("O título não pode ser vazio.");
@@ -22,7 +22,7 @@ public class InputHandler {
     }
 
     public double getBookPrice() {
-        System.out.print("Insira o valor do livro:");
+        System.out.print("Insira o valor do livro: ");
         while (true) {
             try {
                 double price = sc.nextDouble();
@@ -40,7 +40,7 @@ public class InputHandler {
     }
 
     public String getBookPublisher() {
-        System.out.print("Insira a editora do livro:");
+        System.out.print("Insira a editora do livro: ");
         sc.nextLine();
         String publisher = sc.nextLine();
         if (publisher.isEmpty()) {
@@ -54,7 +54,7 @@ public class InputHandler {
         String anotherAuthor;
 
         do {
-            System.out.print("Insira o autor do livro:");
+            System.out.print("Insira o autor do livro: ");
             String author = sc.nextLine();
             if (author.isEmpty()) {
                 System.out.print("O nome do autor não pode ser vazio.");
@@ -62,7 +62,7 @@ public class InputHandler {
                 authors.add(author);
             }
 
-            System.out.print("Deseja inserir mais um autor? (S/N)");
+            System.out.print("Deseja inserir mais um autor? (S/N) ");
             anotherAuthor = sc.nextLine();
 
         } while (anotherAuthor.equalsIgnoreCase("S"));
@@ -75,7 +75,7 @@ public class InputHandler {
     }
 
     public String getBookType() {
-        System.out.print("O livro é digital ou físico? (D/F)");
+        System.out.print("O livro é digital ou físico? (D/F) ");
         while (true) {
             String type = sc.nextLine();
             if (type.equalsIgnoreCase("D") || type.equalsIgnoreCase("F")) {
@@ -87,7 +87,7 @@ public class InputHandler {
     }
 
     public int getBookSize() {
-        System.out.print("Insira o tamanho do livro:");
+        System.out.print("Insira o tamanho do livro: ");
         while (true) {
             try {
                 int size = sc.nextInt();
@@ -105,7 +105,7 @@ public class InputHandler {
     }
 
     public float getBookFreight() {
-        System.out.print("Insira o valor do frete:");
+        System.out.print("Insira o valor do frete: ");
         while (true) {
             try {
                 float freight = sc.nextFloat();
@@ -123,7 +123,7 @@ public class InputHandler {
     }
 
     public int getBookStock() {
-        System.out.print("Insira o número do estoque:");
+        System.out.print("Insira o número do estoque: ");
         while (true) {
             try {
                 int stock = sc.nextInt();

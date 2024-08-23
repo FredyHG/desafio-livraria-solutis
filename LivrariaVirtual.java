@@ -1,13 +1,11 @@
 
 import controller.BookController;
 import factory.BookFactory;
-import model.Book;
 import model.Electronic;
 import model.Printed;
 import repository.BookRepositoryImpl;
 import services.BookServiceImpl;
 import utils.InputHandler;
-
 import java.util.List;
 import java.util.Scanner;
 
