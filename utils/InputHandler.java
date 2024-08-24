@@ -1,5 +1,7 @@
 package utils;
 
+import model.Book;
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -167,12 +169,32 @@ public class InputHandler {
         }
     }
 
-    public String getSelectedBook() {
-        System.out.print("Insira o id do livro que deseja comprar: ");
-        String bookName = sc.nextLine();
-        if (bookName.isEmpty()) {
-            throw new IllegalArgumentException("O id do livro não pode ser vazio.");
+    public String getSelectedBook(List<Book> books) {
+        String bookId = null;
+
+        // Continua solicitando um ID válido até que o usuário insira corretamente
+        while (true) {
+            System.out.print("Insira o id do livro que deseja comprar: ");
+            bookId = sc.nextLine();
+
+            if (bookId.isEmpty()) {
+                System.out.println("O id do livro não pode ser vazio.");
+                continue;  // Repete a solicitação do ID
+            }
+
+            boolean found = false;
+            for (Book book : books) {
+                if (book.getId().equals(bookId)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                return bookId;  // ID válido encontrado, retorna o ID
+            } else {
+                System.out.println("Livro com o ID fornecido não foi encontrado. Tente novamente.");
+            }
         }
-        return bookName;
     }
 }

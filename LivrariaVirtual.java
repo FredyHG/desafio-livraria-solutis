@@ -27,6 +27,7 @@ public class LivrariaVirtual {
     public static void main(String[] args) {
         registerBook();
         makeSale();
+        System.out.println("///===================///");
         getSales();
     }
 
@@ -65,25 +66,21 @@ public class LivrariaVirtual {
         BookController bookController = createBookController();
         Scanner sc = new Scanner(System.in);
 
-        try (sc) {
-            InputHandler inputHandler = new InputHandler(sc);
-            String title = inputHandler.getBookTitle();
-            double price = inputHandler.getBookPrice();
-            String publisher = inputHandler.getBookPublisher();
-            List<String> authors = inputHandler.getBookAuthors();
-            String type = inputHandler.getBookType();
+        InputHandler inputHandler = new InputHandler(sc);
+        String title = inputHandler.getBookTitle();
+        double price = inputHandler.getBookPrice();
+        String publisher = inputHandler.getBookPublisher();
+        List<String> authors = inputHandler.getBookAuthors();
+        String type = inputHandler.getBookType();
 
-            if (type.equalsIgnoreCase("D")) {
-                registerDigitalBook(bookController, inputHandler, title, price, publisher, authors);
-            } else {
-                registerPrintedBook(bookController, inputHandler, title, price, publisher, authors);
-            }
-
-            System.out.println("Livro registrado com sucesso!");
-
-        } catch (Exception e) {
-            System.out.println(STR."Ocorreu um erro: \{e.getMessage()}");
+        if (type.equalsIgnoreCase("D")) {
+            registerDigitalBook(bookController, inputHandler, title, price, publisher, authors);
+        } else {
+            registerPrintedBook(bookController, inputHandler, title, price, publisher, authors);
         }
+
+        System.out.println("Livro registrado com sucesso!");
+
     }
 
     private static void registerPrintedBook(BookController bookController, InputHandler inputHandler,
@@ -132,28 +129,24 @@ public class LivrariaVirtual {
 
         ArrayList<Book> books = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        try {
-            InputHandler inputHandler = new InputHandler(sc);
-            String customerName = inputHandler.getCustomerName();
-            Integer numberOfBooksToBuy = inputHandler.getNumberOfBooksToBuy();
+        InputHandler inputHandler = new InputHandler(sc);
+        String customerName = inputHandler.getCustomerName();
+        Integer numberOfBooksToBuy = inputHandler.getNumberOfBooksToBuy();
 
-            for (int i = 0; i < numberOfBooksToBuy; i++) {
-               String typoOfBook = inputHandler.getBookType();
-               System.out.println(bookController.listByType(typoOfBook));
-               String selectedBook = inputHandler.getSelectedBook();
-//               books.add(bookController.getByTitle(selectedBook));
-                books.add(bookController.getById(selectedBook));
-            }
-
-            Sale sale = new Sale(books, customerName);
-            System.out.println("\nVenda concluida com sucesso");
-            System.out.println();
-            System.out.println(saleController.makeSale(sale));
-
-            bookController.updateStock(sale);
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (int i = 0; i < numberOfBooksToBuy; i++) {
+            String typoOfBook = inputHandler.getBookType();
+            System.out.println(bookController.listByType(typoOfBook));
+            String selectedBook = inputHandler.getSelectedBook(createBookController().listAll());
+            books.add(bookController.getByTitle(selectedBook));
+            books.add(bookController.getById(selectedBook));
         }
+
+        Sale sale = new Sale(books, customerName);
+        System.out.println("\nVenda concluida com sucesso");
+        System.out.println();
+        System.out.println(saleController.makeSale(sale));
+
+        bookController.updateStock(sale);
     }
 
     private static void getSales(){
