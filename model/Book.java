@@ -1,8 +1,10 @@
 package model;
 
 import java.util.List;
+import java.util.UUID;
 
 public abstract class Book {
+    private String id;
     private String title;
     private List<String> author;
     private String publisher;
@@ -10,6 +12,7 @@ public abstract class Book {
 
 
     public Book(String title, Double price, String publisher, List<String> author) {
+        this.id = UUID.randomUUID().toString();
         this.title = title;
         this.price = price;
         this.publisher = publisher;
@@ -51,10 +54,19 @@ public abstract class Book {
     @Override
     public String toString() {
         return "Livro{" +
+                "id='" + id + '\'' +
                 "titulo='" + title + '\'' +
                 ", autores=" + author +
                 ", editora='" + publisher + '\'' +
                 ", preco=" + price +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
