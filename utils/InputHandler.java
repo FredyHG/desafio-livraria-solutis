@@ -139,4 +139,40 @@ public class InputHandler {
             }
         }
     }
+
+    public String getCustomerName() {
+        System.out.print("Insira o nome do cliente: ");
+        String customerName = sc.nextLine();
+        if (customerName.isEmpty()) {
+            throw new IllegalArgumentException("O nome do cliente não pode ser vazio.");
+        }
+        return customerName;
+    }
+
+    public int getNumberOfBooksToBuy() {
+        System.out.print("Insira o número de livros que deseja comprar: ");
+        while (true) {
+            try {
+                int numbers = sc.nextInt();
+                if (numbers < 0) {
+                    throw new IllegalArgumentException("O número de livros não pode ser negativo.");
+                }
+                return numbers;
+            } catch (InputMismatchException e) {
+                System.out.print("Por favor, insira um número válido para a quantidade de livros.");
+                sc.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.print(e.getMessage());
+            }
+        }
+    }
+
+    public String getSelectedBook() {
+        System.out.print("Insira o id do livro que deseja comprar: ");
+        String bookName = sc.nextLine();
+        if (bookName.isEmpty()) {
+            throw new IllegalArgumentException("O id do livro não pode ser vazio.");
+        }
+        return bookName;
+    }
 }
