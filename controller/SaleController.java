@@ -3,6 +3,8 @@ package controller;
 import model.Sale;
 import services.SaleService;
 
+import java.util.List;
+
 public class SaleController {
 
     private final SaleService saleService;
@@ -14,4 +16,7 @@ public class SaleController {
         return this.saleService.makeSale(sale);
     }
 
+    public List<Sale> getAll(){
+        return this.saleService.getAll();
+    }
 }

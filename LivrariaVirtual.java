@@ -27,6 +27,7 @@ public class LivrariaVirtual {
     public static void main(String[] args) {
         registerBook();
         makeSale();
+        getSales();
     }
 
     public static void panel() {
@@ -153,6 +154,12 @@ public class LivrariaVirtual {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void getSales(){
+        SaleController saleController = createSaleController();
+
+        saleController.getAll().forEach(System.out::println);
     }
 }
 

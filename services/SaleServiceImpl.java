@@ -3,9 +3,11 @@ package services;
 import model.Sale;
 import repository.SaleRepository;
 
+import java.util.List;
+
 public class SaleServiceImpl implements SaleService{
 
-    private SaleRepository saleRepository;
+    private final SaleRepository saleRepository;
 
     public SaleServiceImpl(SaleRepository saleRepository){
         this.saleRepository = saleRepository;
@@ -14,5 +16,10 @@ public class SaleServiceImpl implements SaleService{
     @Override
     public Sale makeSale(Sale sale) {
         return saleRepository.save(sale);
+    }
+
+    @Override
+    public List<Sale> getAll() {
+        return saleRepository.getAll();
     }
 }
