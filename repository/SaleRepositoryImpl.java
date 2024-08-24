@@ -14,4 +14,9 @@ public class SaleRepositoryImpl implements SaleRepository{
         sales.add(sale);
         return sale;
     }
+
+    @Override
+    public List<Sale> getAll() {
+        return sales;
+    }
 }
