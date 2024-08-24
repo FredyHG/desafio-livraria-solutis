@@ -13,13 +13,15 @@ public class Electronic extends Book {
 
     @Override
     public String toString() {
-        return "Eletronico {" +
-                "titulo='" + getTitle() + '\'' +
-                ", autores=" + getAuthor() +
-                ", editora='" + getPublisher() + '\'' +
-                ", preco=" + getPrice() +
-                ", tamanho=" + getSize() +
-                '}';
+        return "\n📚 Detalhes do Livro Eletrônico:\n" +
+                "-----------------------------------\n" +
+                "🔖 ID: " + getId() + "\n" +
+                "📖 Título: " + getTitle() + "\n" +
+                "👤 Autor(es): " + getAuthor() + "\n" +
+                "🏢 Editora: " + getPublisher() + "\n" +
+                "💲 Preço: R$ " + getPrice() + "\n" +
+                "📏 Tamanho: " + getSize() + " MB\n" +
+                "-----------------------------------\n";
     }
 
     public Integer getSize() {
