@@ -1,13 +1,22 @@
 
 import controller.BookController;
+import controller.SaleController;
 import factory.BookFactory;
+import model.Book;
 import model.Electronic;
 import model.Printed;
+import model.Sale;
 import repository.BookRepositoryImpl;
+import repository.SaleRepositoryImpl;
 import services.BookServiceImpl;
+import services.SaleServiceImpl;
 import utils.InputHandler;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 
 public class LivrariaVirtual {
@@ -17,6 +26,7 @@ public class LivrariaVirtual {
 
     public static void main(String[] args) {
         registerBook();
+        makeSale();
     }
 
     public static void panel() {
@@ -96,8 +106,53 @@ public class LivrariaVirtual {
             Electronic electronic = BookFactory.createElectronic(title, price, publisher, authors, size);
             bookController.addBook(electronic);
         }
-
     }
 
+    private static SaleController createSaleController() {
+        SaleRepositoryImpl saleRepository = new SaleRepositoryImpl();
+        SaleServiceImpl saleServiceImpl = new SaleServiceImpl(saleRepository);
+        return new SaleController(saleServiceImpl);
+    }
+
+    private static void makeSale(){
+        BookController bookController = createBookController();
+        SaleController saleController = createSaleController();
+
+        //###################################### MOCK ######################################
+        Electronic electronic = BookFactory.createElectronic("livro-eletronico", 10.0, "publisher-eletronico", Arrays.asList("A", "B", "C"), 12);
+        bookController.addBook(electronic);
+        Printed printed = BookFactory.createPrinted("livro-fisico", 20.0, "publisher-fisico", Arrays.asList("d", "e", "f"), 10f, 2);
+        bookController.addBook(printed);
+        Electronic electronic1 = BookFactory.createElectronic("Jogador Numero 1", 10.0, "publisher-eletronico", Arrays.asList("A", "B", "C"), 12);
+        bookController.addBook(electronic1);
+        Printed printed1 = BookFactory.createPrinted("Jogador Numero 1", 20.0, "publisher-fisico", Arrays.asList("d", "e", "f"), 10f, 2);
+        bookController.addBook(printed1);
+        //###################################### MOCK ######################################
+
+        ArrayList<Book> books = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        try {
+            InputHandler inputHandler = new InputHandler(sc);
+            String customerName = inputHandler.getCustomerName();
+            Integer numberOfBooksToBuy = inputHandler.getNumberOfBooksToBuy();
+
+            for (int i = 0; i < numberOfBooksToBuy; i++) {
+               String typoOfBook = inputHandler.getBookType();
+               System.out.println(bookController.listByType(typoOfBook));
+               String selectedBook = inputHandler.getSelectedBook();
+//               books.add(bookController.getByTitle(selectedBook));
+                books.add(bookController.getById(selectedBook));
+            }
+
+            Sale sale = new Sale(books, customerName);
+            System.out.println("\nVenda concluida com sucesso");
+            System.out.println();
+            System.out.println(saleController.makeSale(sale));
+
+            bookController.updateStock(sale);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 

@@ -3,9 +3,11 @@ package services;
 import model.Book;
 import model.Electronic;
 import model.Printed;
+import model.Sale;
 import repository.BookRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookServiceImpl {
 
@@ -21,16 +23,37 @@ public class BookServiceImpl {
     }
 
     public List<Electronic> getAllElectronics() {
-        //IMPLEMENTAR
-        return null;
+        return bookRepository.getBooks().stream()
+                .filter(Electronic.class::isInstance)
+                .map(Electronic.class::cast)
+                .collect(Collectors.toList());
     }
 
     public List<Printed> getAllPrinted() {
-        //IMPLEMENTAR
-        return null;
+        return bookRepository.getBooks().stream()
+                .filter(Printed.class::isInstance)
+                .map(Printed.class::cast)
+                .collect(Collectors.toList());
     }
 
     public List<Book> findAll() {
         return bookRepository.getBooks();
+    }
+
+    public Book getByTitle(String title) {
+        return bookRepository.getByTitle(title);
+    }
+
+    public Book getById(String id) {
+        return bookRepository.getById(id);
+    }
+
+    public void updateStock(Sale sale){
+        List<Printed> booksToUpdate = sale.getBooks().stream().
+                                        filter(Printed.class::isInstance)
+                                        .map(Printed.class::cast)
+                                        .collect(Collectors.toList());
+
+        bookRepository.updateStock(booksToUpdate);
     }
 }
