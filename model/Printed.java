@@ -35,13 +35,15 @@ public class Printed extends Book {
 
     @Override
     public String toString() {
-        return "Impresso {" +
-                "titulo='" + getTitle() + '\'' +
-                ", autores=" + getAuthor() +
-                ", editora='" + getPublisher() + '\'' +
-                ", preco=" + getPrice() +
-                ", frete=" + getFreight() +
-                ", estoque=" + getStock() +
-                '}';
+        return "\n📚 Detalhes do Livro Impresso:\n" +
+                "-----------------------------------\n" +
+                "🔖 ID: " + getId() + "\n" +
+                "📖 Título: " + getTitle() + "\n" +
+                "👤 Autor(es): " + getAuthor() + "\n" +
+                "🏢 Editora: " + getPublisher() + "\n" +
+                "💲 Preço: R$ " + getPrice() + "\n" +
+                "🚚 Frete: R$ " + getFreight() + "\n" +
+                "📦 Estoque: " + getStock() + " unidades\n" +
+                "-----------------------------------\n";
     }
 }
