@@ -23,17 +23,15 @@ public class BookServiceImpl {
     }
 
     public List<Electronic> getAllElectronics() {
-        return bookRepository.getBooks().stream()
-                .filter(Electronic.class::isInstance)
-                .map(Electronic.class::cast)
-                .collect(Collectors.toList());
+        // Implementar
+
+        return null;
     }
 
     public List<Printed> getAllPrinted() {
-        return bookRepository.getBooks().stream()
-                .filter(Printed.class::isInstance)
-                .map(Printed.class::cast)
-                .collect(Collectors.toList());
+        // Implementar
+
+        return null;
     }
 
     public List<Book> findAll() {

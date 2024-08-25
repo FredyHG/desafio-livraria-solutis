@@ -1,7 +1,6 @@
 package controller;
 
 import model.Book;
-import model.Printed;
 import model.Sale;
 import services.BookServiceImpl;
 
@@ -23,14 +22,10 @@ public class BookController {
     }
 
     public List<?> listByType(String type){
-        switch (type.toUpperCase()){
-            case "D":
-                return bookServiceImpl.getAllElectronics();
-            case "F":
-                return bookServiceImpl.getAllPrinted();
-            default:
-                return null;
-        }
+
+        // Implementar
+
+        return null;
     }
 
     public Book getByTitle(String title){
