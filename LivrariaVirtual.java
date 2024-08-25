@@ -26,6 +26,7 @@ public class LivrariaVirtual {
 
     public static void main(String[] args) {
         registerBook();
+        listBooks();
         makeSale();
         System.out.println("///===================///");
         getSales();
@@ -41,6 +42,52 @@ public class LivrariaVirtual {
 
         BookFactory.createElectronic(null, null, null, null, null); //example factory
     }
+
+    public static void listBooks() {
+        BookRepositoryImpl bookRepository = new BookRepositoryImpl();
+        BookServiceImpl bookServiceImpl = new BookServiceImpl(bookRepository);
+        BookController bookController = new BookController(bookServiceImpl);
+        Scanner sc = new Scanner(System.in);
+        InputHandler inputHandler = new InputHandler(sc);
+
+        while (true) {
+            System.out.println("============================");
+            System.out.println("1. Listar todos os livros");
+            System.out.println("2. Listar livros eletrônicos");
+            System.out.println("3. Listar livros impressos");
+            System.out.println("4. Sair");
+            System.out.print("Escolha uma opção: ");
+            int option = sc.nextInt();
+
+            switch (option) {
+                case 1:
+                    List<Book> allBooks = bookController.listAll();
+                    System.out.println("Todos os Livros:");
+                    allBooks.forEach(System.out::println);
+                    break;
+
+                case 2:
+                    List<?> electronicBooks = bookController.listByType("E");
+                    System.out.println("Livros Eletrônicos:");
+                    electronicBooks.forEach(System.out::println);
+                    break;
+
+                case 3:
+                    List<?> printedBooks = bookController.listByType("P");
+                    System.out.println("Livros Impressos:");
+                    printedBooks.forEach(System.out::println);
+                    break;
+
+                case 4:
+                    System.out.println("Saindo...");
+                    return;
+
+                default:
+                    System.out.println("Opção inválida, por favor tente novamente.");
+            }
+        }
+    }
+
 
     public static BookController createBookController() {
         BookRepositoryImpl bookRepository = new BookRepositoryImpl();
