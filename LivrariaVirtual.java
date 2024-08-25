@@ -182,9 +182,7 @@ public class LivrariaVirtual {
     private static void makeSale() {
         BookController bookController = createBookController();
         SaleController saleController = createSaleController();
-
         mockData();
-
         ArrayList<Book> books = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         InputHandler inputHandler = new InputHandler(sc);
