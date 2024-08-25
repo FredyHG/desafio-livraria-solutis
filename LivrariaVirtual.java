@@ -1,4 +1,3 @@
-
 import controller.BookController;
 import controller.SaleController;
 import factory.BookFactory;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 
 public class LivrariaVirtual {
@@ -25,25 +23,47 @@ public class LivrariaVirtual {
     private static final int MAX_ELECTRONIC = 20;
 
     public static void main(String[] args) {
-        registerBook();
-        listBooks();
-        makeSale();
-        System.out.println("///===================///");
-        getSales();
+        Scanner scanner = new Scanner(System.in);
+        panel();
+
     }
 
     public static void panel() {
-        BookRepositoryImpl bookRepository = new BookRepositoryImpl();
-        BookServiceImpl bookServiceImpl = new BookServiceImpl(bookRepository);
-        BookController bookController = new BookController(bookServiceImpl);
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Escolha uma opção:");
+            System.out.println("1. Cadastrar Livro");
+            System.out.println("2. Realizar Venda");
+            System.out.println("3. Listar Livros");
+            System.out.println("4. Listar Vendas");
+            System.out.println("5. Sair");
 
-        //Implementar painel
-        //chamar os metodos de controller
+            String opcaoPrincipal = scanner.nextLine();
 
-        BookFactory.createElectronic(null, null, null, null, null); //example factory
+            switch (opcaoPrincipal) {
+                case "1":
+                    registerBook();
+                    break;
+                case "2":
+                    makeSale();
+                    break;
+                case "3":
+                    listBooks(scanner);
+                    break;
+                case "4":
+                    getSales();
+                    break;
+                case "5":
+                    System.out.println("Saindo... \n\nAutores: Pietra, Maria Eduarda, Renato, Fredy, Syllas, Luiz Carlos.");
+                    System.exit(0);
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+
     }
 
-    public static void listBooks() {
+    public static void listBooks(Scanner scanner) {
         BookRepositoryImpl bookRepository = new BookRepositoryImpl();
         BookServiceImpl bookServiceImpl = new BookServiceImpl(bookRepository);
         BookController bookController = new BookController(bookServiceImpl);
@@ -159,7 +179,7 @@ public class LivrariaVirtual {
         return new SaleController(saleServiceImpl);
     }
 
-    private static void makeSale(){
+    private static void makeSale() {
         BookController bookController = createBookController();
         SaleController saleController = createSaleController();
 
@@ -196,7 +216,7 @@ public class LivrariaVirtual {
         bookController.updateStock(sale);
     }
 
-    private static void getSales(){
+    private static void getSales() {
         SaleController saleController = createSaleController();
 
         saleController.getAll().forEach(System.out::println);
