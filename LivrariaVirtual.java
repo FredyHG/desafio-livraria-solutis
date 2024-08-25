@@ -26,6 +26,7 @@ public class LivrariaVirtual {
 
     public static void main(String[] args) {
         registerBook();
+        listBooks();
         makeSale();
         System.out.println("///===================///");
         getSales();
