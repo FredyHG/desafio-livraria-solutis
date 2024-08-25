@@ -183,16 +183,7 @@ public class LivrariaVirtual {
         BookController bookController = createBookController();
         SaleController saleController = createSaleController();
 
-        //###################################### MOCK ######################################
-        Electronic electronic = BookFactory.createElectronic("livro-eletronico", 10.0, "publisher-eletronico", Arrays.asList("A", "B", "C"), 12);
-        bookController.addBook(electronic);
-        Printed printed = BookFactory.createPrinted("livro-fisico", 20.0, "publisher-fisico", Arrays.asList("d", "e", "f"), 10f, 2);
-        bookController.addBook(printed);
-        Electronic electronic1 = BookFactory.createElectronic("Jogador Numero 1", 10.0, "publisher-eletronico", Arrays.asList("A", "B", "C"), 12);
-        bookController.addBook(electronic1);
-        Printed printed1 = BookFactory.createPrinted("Jogador Numero 1", 20.0, "publisher-fisico", Arrays.asList("d", "e", "f"), 10f, 2);
-        bookController.addBook(printed1);
-        //###################################### MOCK ######################################
+        mockData();
 
         ArrayList<Book> books = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -204,7 +195,7 @@ public class LivrariaVirtual {
             String typoOfBook = inputHandler.getBookType();
             System.out.println(bookController.listByType(typoOfBook));
             String selectedBook = inputHandler.getSelectedBook(createBookController().listAll());
-            books.add(bookController.getByTitle(selectedBook));
+            //books.add(bookController.getByTitle(selectedBook));
             books.add(bookController.getById(selectedBook));
         }
 
@@ -221,5 +212,18 @@ public class LivrariaVirtual {
 
         saleController.getAll().forEach(System.out::println);
     }
+
+    private static void  mockData(){
+        BookController bookController = createBookController();
+        Electronic electronic = BookFactory.createElectronic("livro-eletronico", 10.0, "publisher-eletronico", Arrays.asList("A", "B", "C"), 12);
+        bookController.addBook(electronic);
+        Printed printed = BookFactory.createPrinted("livro-fisico", 20.0, "publisher-fisico", Arrays.asList("d", "e", "f"), 10f, 2);
+        bookController.addBook(printed);
+        Electronic electronic1 = BookFactory.createElectronic("Jogador Numero 1", 10.0, "publisher-eletronico", Arrays.asList("A", "B", "C"), 12);
+        bookController.addBook(electronic1);
+        Printed printed1 = BookFactory.createPrinted("Jogador Numero 1", 20.0, "publisher-fisico", Arrays.asList("d", "e", "f"), 10f, 2);
+        bookController.addBook(printed1);
+    }
+
 }
 
