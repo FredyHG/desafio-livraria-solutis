@@ -22,10 +22,14 @@ public class BookController {
     }
 
     public List<?> listByType(String type){
-
-        // Implementar
-
-        return null;
+        switch (type.toUpperCase()) {
+            case "D":
+                return bookServiceImpl.getAllElectronics();
+            case "F":
+                return bookServiceImpl.getAllPrinted();
+            default:
+                return null;  
+        }
     }
 
     public Book getByTitle(String title){
