@@ -52,11 +52,15 @@ public class LivrariaVirtual {
 
         while (true) {
             System.out.println("============================");
+            System.out.println("     Sistema de Livraria     ");
+            System.out.println("       - Listar Livros -     ");
+            System.out.println("============================");
+            System.out.println("Escolha uma opção:");
             System.out.println("1. Listar todos os livros");
             System.out.println("2. Listar livros eletrônicos");
             System.out.println("3. Listar livros impressos");
             System.out.println("4. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.println("============================");
             int option = sc.nextInt();
 
             switch (option) {
@@ -85,6 +89,7 @@ public class LivrariaVirtual {
                 default:
                     System.out.println("Opção inválida, por favor tente novamente.");
             }
+            break;
         }
     }
 
