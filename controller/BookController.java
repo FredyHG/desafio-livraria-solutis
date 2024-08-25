@@ -28,7 +28,7 @@ public class BookController {
             case "F":
                 return bookServiceImpl.getAllPrinted();
             default:
-                return null;  
+                return null;
         }
     }
 
