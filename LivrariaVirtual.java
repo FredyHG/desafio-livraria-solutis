@@ -57,8 +57,8 @@ public class LivrariaVirtual {
             System.out.println("============================");
             System.out.println("Escolha uma opção:");
             System.out.println("1. Listar todos os livros");
-            System.out.println("2. Listar livros eletrônicos");
-            System.out.println("3. Listar livros impressos");
+            System.out.println("2. Listar livros digitais");
+            System.out.println("3. Listar livros físicos");
             System.out.println("4. Sair");
             System.out.println("============================");
             int option = sc.nextInt();
@@ -71,14 +71,14 @@ public class LivrariaVirtual {
                     break;
 
                 case 2:
-                    List<?> electronicBooks = bookController.listByType("E");
-                    System.out.println("Livros Eletrônicos:");
+                    List<?> electronicBooks = bookController.listByType("D");
+                    System.out.println("Livros Digitais:");
                     electronicBooks.forEach(System.out::println);
                     break;
 
                 case 3:
-                    List<?> printedBooks = bookController.listByType("P");
-                    System.out.println("Livros Impressos:");
+                    List<?> printedBooks = bookController.listByType("F");
+                    System.out.println("Livros Físicos:");
                     printedBooks.forEach(System.out::println);
                     break;
 
